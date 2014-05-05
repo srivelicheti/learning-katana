@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@Model.title</title>
+    <script src="/Scripts/jquery-2.1.0.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-2.1.0.intellisense.js"></script>
+    <script type="text/javascript" src="/Scripts/knockout-3.1.0.debug.js"></script>
+</head>
+<body>
+    <header>
+        <h1>@Model.title</h1>
+    </header>
+    <section>
+        <h2>Backlog</h2>
+        <ul class="bugs" id="backlog" data-bind="foreach:backlog">
+            <li>
+                [<span data-bind="text:Id"></span>] <span data-bind="text:title"></span>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h2>Working</h2>
+        <ul class="bugs" id="working" data-bind="foreach:working">
+            <li>
+                [<span data-bind="text:Id"></span>] <span data-bind="text:title"></span>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <h2>Done</h2>
+        <ul class="bugs" id="done" data-bind="foreach:working">
+            <li>
+                [<span data-bind="text:Id"></span>] <span data-bind="text:title"></span>
+            </li>
+        </ul>
+    </section>
+
+    <script type="text/javascript">
+        $(function () {
+            var viewModel;
+            $.getJSON("/api/bugs", function (data) {
+                var model = data;
+                viewModel = {
+                    backlog: ko.observable(model.filter(function (element) { element.Status == "backlog"; })),
+                    working: ko.observable(model.filter(function (element) { element.Status == "working"; })),
+                    done: ko.observable(model.filter(function (element) { element.Status == "done"; })),
+                    changeState: function (bug, newState) {
+                        var self = this;
+                        $.post('/api/bugs' + newState, { '': bug.Id }, function (data) {
+                            self.moveBug(data);
+                        })
+                    },
+                    moveBug: function (bug) {
+                        this[bug.State].push(bug);
+                    }
+                };
+                ko.applyBindings(viewModel);
+            });
+        });
+        
+    </script>
+</body>
+</html>
