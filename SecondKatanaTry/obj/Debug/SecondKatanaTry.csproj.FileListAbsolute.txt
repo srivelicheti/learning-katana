@@ -10,7 +10,6 @@ C:\handson\Katana\SecondKatanaTry\SecondKatanaTry\bin\Microsoft.Owin.xml
 C:\handson\Katana\SecondKatanaTry\SecondKatanaTry\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\handson\Katana\SecondKatanaTry\SecondKatanaTry\bin\Nancy.xml
 C:\handson\Katana\SecondKatanaTry\SecondKatanaTry\bin\Nancy.Owin.xml
-C:\handson\Katana\SecondKatanaTry\SecondKatanaTry\obj\Debug\SecondKatanaTry.csprojResolveAssemblyReference.cache
 C:\handson\Katana\SecondKatanaTry\SecondKatanaTry\obj\Debug\SecondKatanaTry.dll
 C:\handson\Katana\SecondKatanaTry\SecondKatanaTry\obj\Debug\SecondKatanaTry.pdb
 C:\handson\Katana\SecondKatanaTry\SecondKatanaTry\bin\Newtonsoft.Json.dll

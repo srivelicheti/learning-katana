@@ -14,13 +14,16 @@ namespace SecondKatanaTry
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseNancy();
+            //app.UseNancy();
 
             var config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
-            config.Routes.MapHttpRoute("bugs", "api/{Controller}");
+            //config.Routes.MapHttpRoute("Default", "{controller}/{bugId}", new { controller = "Bugs", bugId = RouteParameter.Optional });
+            config.Routes.MapHttpRoute("bugs", "api/{controller}");
             config.EnableSystemDiagnosticsTracing();
             app.UseWebApi(config);
+
+            app.UseNancy();
         }
 
         

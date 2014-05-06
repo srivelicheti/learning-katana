@@ -14,7 +14,7 @@
         <h2>Backlog</h2>
         <ul class="bugs" id="backlog" data-bind="foreach:backlog">
             <li>
-                [<span data-bind="text:Id"></span>] <span data-bind="text:title"></span>
+                [<span data-bind="text:Id"></span>] <span data-bind="text:Title"></span>
             </li>
         </ul>
     </section>
@@ -22,15 +22,15 @@
         <h2>Working</h2>
         <ul class="bugs" id="working" data-bind="foreach:working">
             <li>
-                [<span data-bind="text:Id"></span>] <span data-bind="text:title"></span>
+                [<span data-bind="text:Id"></span>] <span data-bind="text:Title"></span>
             </li>
         </ul>
     </section>
     <section>
         <h2>Done</h2>
-        <ul class="bugs" id="done" data-bind="foreach:working">
+        <ul class="bugs" id="done" data-bind="foreach:done">
             <li>
-                [<span data-bind="text:Id"></span>] <span data-bind="text:title"></span>
+                [<span data-bind="text:Id"></span>] <span data-bind="text:Title"></span>
             </li>
         </ul>
     </section>
@@ -41,9 +41,9 @@
             $.getJSON("/api/bugs", function (data) {
                 var model = data;
                 viewModel = {
-                    backlog: ko.observable(model.filter(function (element) { element.Status == "backlog"; })),
-                    working: ko.observable(model.filter(function (element) { element.Status == "working"; })),
-                    done: ko.observable(model.filter(function (element) { element.Status == "done"; })),
+                    backlog: ko.observable(model.filter(function (element) { return element.State == "backlog"; })),
+                    working: ko.observable(model.filter(function (element) { return element.State == "working"; })),
+                    done: ko.observable(model.filter(function (element) { return element.State == "done"; })),
                     changeState: function (bug, newState) {
                         var self = this;
                         $.post('/api/bugs' + newState, { '': bug.Id }, function (data) {
